@@ -10,7 +10,7 @@ services:
     environment:
       - db_url=postgresql://dev_admin:dev@database:5432/helpalign_dev
       - pass_key=THISISATESTKEYDONOTUSETHISINPROD
-      - gmaps_key=AIzaSyBYSalfsEgZATMKbsxgLu4TaDNbOuOEcw4
+      - gmaps_key=
     volumes:
       - ./backend:/app
 
