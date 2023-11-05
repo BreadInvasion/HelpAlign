@@ -1,0 +1,43 @@
+version: '3.10.11'
+
+services:
+
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    command: bash -c "cd app && PYTHONPATH=. alembic upgrade head && python main.py"
+    environment:
+      - db_url=postgresql://dev_admin:dev@database:5432/helpalign_dev
+      - pass_key=THISISATESTKEYDONOTUSETHISINPROD
+      - gmaps_key=AIzaSyBYSalfsEgZATMKbsxgLu4TaDNbOuOEcw4
+    volumes:
+      - ./backend:/app
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend:/app
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - backend
+
+  database:
+    image: postgres:16-alpine
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_USER=dev_admin
+      - POSTGRES_PASSWORD=dev
+      - POSTGRES_DB=helpalign_dev
+
+volumes:
+  caddy-data:
+  caddy-config:
+  postgres-data:

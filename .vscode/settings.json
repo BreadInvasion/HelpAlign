@@ -1,0 +1,24 @@
+{
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/*/**": true,
+        "**/.hg/store/**": true,
+        "**/venv/**": true
+    },
+    "terminal.integrated.env.linux": {
+        "PYTHONPATH": "${workspaceFolder}/backend/app"
+    },
+    "python.analysis.autoImportCompletions": false,
+    "isort.args": [
+        "--profile",
+        "black"
+    ],
+    "[python]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        },
+        "editor.defaultFormatter": "ms-python.black-formatter",
+    },
+    "python.analysis.typeCheckingMode": "basic"
+}
